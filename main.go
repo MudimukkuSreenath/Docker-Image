@@ -2,23 +2,19 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"net/http"
 )
 
-const (
-	CONN_HOST = "localhost"
-	CONN_PORT = "8585"
-)
-
-func helloWorld(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello World!")
+func index(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "hollow")
 }
+func check(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "health hollow")
+}
+
 func main() {
-	http.HandleFunc("/", helloWorld)
-	err := http.ListenAndServe(CONN_HOST+":"+CONN_PORT, nil)
-	if err != nil {
-		log.Fatal("error starting http server : ", err)
-		return
-	}
+	http.HandleFunc("/", index)
+	http.HandleFunc("/heathceck", check)
+	fmt.Println("server starting")
+	http.ListenAndServe(":30000", nil)
 }
