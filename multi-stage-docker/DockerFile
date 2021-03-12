@@ -1,0 +1,5 @@
+FROM bigImageWithEverything AS Builder
+RUN go build -o main ./...
+
+FROM LightweightImage AS Production
+CMD ["./main"]
